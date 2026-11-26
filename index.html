@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:,">
+<title>#Silverpalace</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#efe8d9;color:#201c16;font:1rem/1.55 Tahoma,sans-serif;padding:clamp(24px,7vw,64px)}main{max-width:28rem;margin:8vh auto 0;padding:clamp(20px,6vw,40px);border:1px solid #8c7a5e;background:#fbf6ec}h1{font:700 clamp(1.8rem,7vw,2.7rem)/1.16 Georgia,serif;margin:0 0 16px}p{margin:0 0 18px}button{font:inherit;font-weight:700;background:#30281d;color:#fff;border:0;padding:12px 16px;min-height:48px;width:100%;cursor:pointer}a{display:inline-flex;align-items:center;min-height:44px;color:#4b3520;margin-top:9px}input{font:inherit;width:100%;padding:8px;color:inherit;background:transparent;border:1px solid #8c7a5e}#fallback{margin-top:16px}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #7a4c1f;outline-offset:3px}[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+<h1>#Silverpalace</h1>
+<p>คัดลอกแฮชแท็กไว้ใช้ในโพสต์ แล้วไปยังเว็บไซต์ Silver Palace</p>
+<button id="copy" type="button" hidden>คัดลอก #Silverpalace แล้วไปต่อ</button>
+<div id="fallback" hidden><p id="status" role="status"></p><label for="tag">แฮชแท็กสำหรับคัดลอก</label><input id="tag" value="#Silverpalace" readonly></div>
+<noscript><p>กดค้างที่แฮชแท็กด้านบนเพื่อคัดลอก แล้วเลือกไปยังเว็บไซต์</p></noscript>
+<a id="continue" href="https://silverpalace.elementagames.com/en-us" rel="noreferrer">ไปยังเว็บไซต์โดยไม่คัดลอก</a>
+</main>
+<script>
+const copy = document.querySelector('#copy');
+const tag = document.querySelector('#tag');
+const onward = document.querySelector('#continue');
+copy.hidden = false;
+copy.addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(tag.value);
+  } catch {
+    document.querySelector('#fallback').hidden = false;
+    document.querySelector('#status').textContent = 'คัดลอกไม่ได้ในเบราว์เซอร์นี้ กดค้างที่แฮชแท็กเพื่อคัดลอกเอง แล้วกดไปยังเว็บไซต์';
+    onward.textContent = 'ไปยังเว็บไซต์ Silver Palace';
+    tag.focus();
+    tag.select();
+    return;
+  }
+  location.assign(onward.href);
+});
+</script>
+</body>
+</html>
